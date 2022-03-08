@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
-
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Link } from 'react-router-dom';
 // update lab 4.0
 
     
@@ -47,8 +47,20 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
                 return(
                     <div className = "container">
                         <div className = "row">
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to='/menu'>Menu</Link>
+                        </BreadcrumbItem>
+                        <Breadcrumb active>{props.dish.name}</Breadcrumb>
+                    </Breadcrumb>    
+                    <div className ="col-12">
+                            <h3>{props.dish.name}</h3>
+                            <hr />
+                    </div>
+                    </div>
+                        <div className = "row">
                             <RenderDish dish={props.dish} />
-                            <RenderComments comments = {props.dish.comments}  />
+                            <RenderComments comments = {props.comments}  />
                         </div>
                     </div>
                 )
