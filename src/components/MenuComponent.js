@@ -35,7 +35,7 @@ import { Link } from 'react-router-dom';
                         <BreadcrumbItem>
                             <Link to='/home'>Home</Link>
                         </BreadcrumbItem>
-                        <Breadcrumb active>Menu</Breadcrumb>
+                        <BreadcrumbItem active>Menu</BreadcrumbItem>
                     </Breadcrumb>    
                     <div className ="col-12">
                             <h3>Menu</h3>
