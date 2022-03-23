@@ -20,52 +20,28 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
         )
     }
 
-    // function RenderComments({comments, addComment, dishId}) {
-    //     if(comments != null) {
-    //         return(
-    //             <div className = "col-12 col-md-5 m-1">
-    //                 <h4>Comments</h4>
-    //                 <ul className = "list-unstyled">
-    //                     {comments.map((comment) => {
-    //                         return(
-    //                             <li key={comment.id}>
-    //                                 <p>{comment.comment}</p>
-    //                                 <p>--{comment.author}, {comment.date}</p>
-    //                             </li>
-    //                         )
-    //                     })}
-    //                 </ul>
-    //                 <CommentForm dishId={dishId} addComment={addComment} />
-    //             </div>
-    //         )
-    //     } else {
-    //         return(
-    //             <div></div>
-    //         )
-    //     }
-    // }
-    function RenderComments({comments,addComment,dishId}) {
-        if(comments != null){
+    function RenderComments({comments, addComment, dishId}) {
+        if(comments != null) {
             return(
-                <div className="col-12 col-md-5 m-1">
+                <div className = "col-12 col-md-5 m-1">
                     <h4>Comments</h4>
-                    <ul className="list-unstyled">
+                    <ul className = "list-unstyled">
                         {comments.map((comment) => {
                             return(
                                 <li key={comment.id}>
                                     <p>{comment.comment}</p>
                                     <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                                 </li>
-                            );
+                            )
                         })}
                     </ul>
                     <CommentForm dishId={dishId} addComment={addComment} />
                 </div>
-            );
+            )
         } else {
             return(
                 <div></div>
-            );
+            )
         }
     }
 // validation form submit comment 
@@ -105,15 +81,16 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                     </Button>
 
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                        <ModalHeader toggle={this.state.toggleModal}>Submit Comment</ModalHeader>
+                        <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                         <ModalBody>
-                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <LocalForm onSubmit={this.handleSubmit}>
                                 <Row className='form-group'>
                                     
                                     <Col>
                                     <Label htmlFor="rating" >Rating</Label>
                                         <Control.select model='.rating'  name="rating"
-                                        className='form-control'>
+                                        className='form-control'
+                                        defaultValue="1"  >
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -125,8 +102,8 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                                 <Row className='form-group'>
                                     
                                     <Col>
-                                    <Label htmlFor="yourName" >Your Name</Label>
-                                        <Control.text model='.yourName' id="yourName" name="yourName" 
+                                    <Label htmlFor="author" >Your Name</Label>
+                                        <Control.text model='.author' id="author" name="author" 
                                     className="form-control"
                                     placeholder="Enter your name"
                                     validators={{
@@ -134,7 +111,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                                     }}
                                     />
                                     <Errors className='text-danger'
-                                    model='.yourName'
+                                    model='.author'
                                     show='touched'
                                     messages={{
                                         required: 'Required',
@@ -146,8 +123,8 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                                 <Row className='form-group'>
                                    
                                     <Col>
-                                    <Label htmlFor="com" >Comment</Label>
-                                        <Control.textarea model='.mess' id="mess" name="mess"
+                                    <Label htmlFor="comment" >Comment</Label>
+                                        <Control.textarea model='.comment' id="comment" name="comment"
                                         rows='6'
                                         className='form-control' />
                                     </Col>
